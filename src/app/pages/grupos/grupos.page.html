@@ -1,9 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>grupos</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons>
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title>grupos</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar animated (ionChange)="search($event)" placeholder="De que animal quieres saver..."></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+    <ion-list>
+        <ion-item *ngFor="let item of tweets">
+
+            <ion-card>
+                <img src="assets/img/pet.jpg" />
+                <ion-card-header>
+
+                    <ion-card-title>{{busqueda.tema}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+
+                    <p>
+                        {{item.text}}
+                    </p>
+
+                    <ion-button expand="full">Ingresa</ion-button>
+                </ion-card-content>
+
+            </ion-card>
+        </ion-item>
+    </ion-list>
 
 </ion-content>

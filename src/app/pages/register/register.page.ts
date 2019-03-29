@@ -114,7 +114,7 @@ export class RegisterPage implements OnInit {
           let result = await this.fireAuth.auth
           .createUserWithEmailAndPassword(this.vet.email,this.vet.password)
           if (result){
-            this.dba.cargar_user(this.vet);
+            // this.dba.cargar_user(this.vet);
           }
         }
         catch(err){
@@ -153,7 +153,7 @@ export class RegisterPage implements OnInit {
           let result = await this.fireAuth.auth
           .createUserWithEmailAndPassword(this.vet.email,this.vet.password)
           if (result){
-            this.dba.cargar_user(this.vet);
+            // this.dba.cargar_user(this.vet);
           }
         }
         catch(err){

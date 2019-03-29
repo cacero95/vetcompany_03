@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TipsPage } from './tips.page';
-import { PipesModule } from 'src/app/pipes/pipes.module';
+import { CodigoPolicialPage } from './codigo-policial.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TipsPage
+    component: CodigoPolicialPage
   }
 ];
 
@@ -20,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    PipesModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TipsPage]
+  declarations: [CodigoPolicialPage]
 })
-export class TipsPageModule {}
+export class CodigoPolicialPageModule {}

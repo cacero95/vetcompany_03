@@ -12,16 +12,16 @@
     <ion-card>
         <img src="assets/img/tengo_mascota.jpg" />
         <ion-card-header>
-            <ion-card-subtitle>Que información conoces de mascotas?</ion-card-subtitle>
+
             <ion-card-title>Grupos de mascotas</ion-card-title>
         </ion-card-header>
         <ion-card-content>
 
             <p>
-                Enterate, y conoce información acerca de mascotas
+                Conoce, e interactua con grupos de mascotas
             </p>
 
-            <ion-button expand="full">Ingresa</ion-button>
+            <ion-button (click)="explorar('grupos')" expand="full">Ingresa</ion-button>
         </ion-card-content>
 
     </ion-card>
@@ -29,16 +29,16 @@
     <ion-card>
         <img src="assets/img/pet.jpg" />
         <ion-card-header>
-            <ion-card-subtitle>Tips</ion-card-subtitle>
-            <ion-card-title>Tips para tu mascota</ion-card-title>
+
+            <ion-card-title>Información para tu mascota</ion-card-title>
         </ion-card-header>
         <ion-card-content>
 
             <p>
-                Enterate de tips para cuidar a tu mascota
+                Enterate de tips, e información para tu mascota
             </p>
 
-            <ion-button expand="full">Ingresa</ion-button>
+            <ion-button (click)="explorar('tips')" expand="full">Ingresa</ion-button>
         </ion-card-content>
 
     </ion-card>

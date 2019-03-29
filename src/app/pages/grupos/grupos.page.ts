@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-grupos',
@@ -8,13 +8,46 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GruposPage implements OnInit {
 
+  /**
+   * 
+   * Identificador
+   * 
+   * 161045641500359
+   * 
+   * secret key facebook
+   * 
+   * b7ed7ce97a93bb8e414f1290524541b7
+   */
+
+  busqueda = {};
+  tweets:any[] = [];
   constructor(private http:HttpClient) {
-    this.http.get('https://vetcompany.herokuapp.com/twitter').subscribe(data=>{
-      console.log(data);
-    })  
+    
+    this.busqueda = {
+      tema:'@Muy_mascotas'
+    }
+    
+    // HttpParams para ingresar parametro en la busqueda
+    this.http.post('https://vetcompany.herokuapp.com/twitter',this.busqueda)
+    .subscribe((data:any)=>{
+      this.tweets = data.cuerpo.statuses;
+    })
+      
   }
 
   ngOnInit() {
   }
+
+  search(event){
+    this.busqueda = {
+      tema:event.target.value
+    }
+    this.http.post('https://vetcompany.herokuapp.com/twitter',this.busqueda)
+    .subscribe((data:any)=>{
+      this.tweets = data.cuerpo.statuses;
+    })
+  }
+
+
 
 }
