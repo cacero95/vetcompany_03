@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding *ngIf="!user">
 
     <ion-card>
         <img src="assets/img/tengo_mascota.jpg" />
@@ -38,7 +38,7 @@
                 Enterate de tips, e información para tu mascota
             </p>
 
-            <ion-button (click)="explorar('tips')" expand="full">Ingresa</ion-button>
+            <ion-button (click)="explorar('pet-info')" expand="full">Ingresa</ion-button>
         </ion-card-content>
 
     </ion-card>

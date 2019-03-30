@@ -14,11 +14,15 @@ import { TypeUserPage } from './pages/type-user/type-user.page';
 
 // plugins
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { IonicStorageModule } from '@ionic/storage';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FullViewPage } from './pages/full-view/full-view.page';
+import { UserInfoPage } from './pages/user-info/user-info.page';
 
 // firebase credentials
 
@@ -33,19 +37,21 @@ export const firebaseConfig = {
 
 
 @NgModule({
-  declarations: [AppComponent,TypeUserPage],
-  entryComponents: [TypeUserPage],
+  declarations: [AppComponent,TypeUserPage,FullViewPage,UserInfoPage],
+  entryComponents: [TypeUserPage,FullViewPage,UserInfoPage],
   imports: [BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     HttpClientModule,
     AngularFireAuthModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
     ImagePicker,
+    SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

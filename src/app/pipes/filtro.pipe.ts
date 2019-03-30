@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Tips } from '../services/dba.service';
+import { Tips } from '../models/pets_data';
+
 
 @Pipe({
   name: 'filtro'

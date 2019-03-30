@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DbaService } from 'src/app/services/dba.service';
-import { Veterinaria } from 'src/app/models/usuarios';
+import { Veterinaria, User } from 'src/app/models/usuarios';
 import { AlertController } from '@ionic/angular';
 import { ImagePicker,ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 
 // firebase
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class RegisterPage implements OnInit {
   type:string;
   services:any[] = [];
   vet = {} as Veterinaria;
+  user = {} as User;
   servicios:any[] = [];
   image64:string;
   password:string;
@@ -25,12 +27,12 @@ export class RegisterPage implements OnInit {
     private alertCtrl:AlertController,
     private image:ImagePicker,
     private fireAuth:AngularFireAuth,
-    ) {
+    private router:Router) {
     
     this.type = this.dba.getTipo();
     
     this.services = [
-      {
+    {
         nombre: 'Guarderia',
         img: 'assets/img/home.png'
     },
@@ -104,7 +106,20 @@ export class RegisterPage implements OnInit {
   async agregar_user(is_image){
     if (!is_image){
       if(this.type == 'mascota'){
-      
+        try{
+          let result = await this.fireAuth.auth
+          .createUserWithEmailAndPassword(this.user.email,this.password)
+          if (result){
+
+            this.dba.registrar_user(this.user,false);
+            this.router.navigate(['/tabs/home']);
+
+
+          }
+        }
+        catch(err){
+          console.log(JSON.stringify(err));
+        }
       }
       else {
         this.vet.type = this.type;
@@ -112,9 +127,12 @@ export class RegisterPage implements OnInit {
         
         try{
           let result = await this.fireAuth.auth
-          .createUserWithEmailAndPassword(this.vet.email,this.vet.password)
+          .createUserWithEmailAndPassword(this.vet.email,this.password)
           if (result){
-            // this.dba.cargar_user(this.vet);
+            this.dba.registrar_vet(this.vet);
+            this.router.navigate(['/tabs/home']);
+
+
           }
         }
         catch(err){
@@ -136,10 +154,7 @@ export class RegisterPage implements OnInit {
       },(err)=>console.log(JSON.stringify(err)));
       
       if (this.type == 'mascota'){
-        /**
-         * se registran los datos del usuario de tipo
-         * normal_user
-         */
+        // hay que crear el modal para crear el user
       }
       else{
         /**

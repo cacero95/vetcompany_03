@@ -3,16 +3,14 @@ export interface Tips {
     short:string;
     descripcion:string;
   }
-  export interface pets_data {
+  export interface Pets_data {
     titulo:string;
     short?:string;
     descripcion?:string;
-    clases?:Clases
+    clases?:Clases;
+    tipos?:Clases[];
   }
   export interface Clases{
-    descripcion1?:string;
-    descripcion2?:string;
-    descripcion3?:string;
-    descripcion5?:string;
-    descripcion6?:string;
+    titulo?:string;
+    descripcion?:string[];
   }

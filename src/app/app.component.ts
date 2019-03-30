@@ -30,17 +30,26 @@ export class AppComponent {
     this.initializeApp();
   }
   async navegar(url){
-    let modal = await this.modalCtrl.create({
-      component:TypeUserPage,
-      componentProps:{
-        tipo:url
-      }
-    });
-    modal.present();
-    const data = await modal.onDidDismiss();
-    this.dba.setTipo(data.data.result);
-    this.router.navigate(['/register']);
+
     
+    if (url == '/login'){
+      this.router.navigate(['/login']);
+    }
+    else {
+      
+      let modal = await this.modalCtrl.create({
+        component:TypeUserPage,
+        componentProps:{
+          tipo:url
+        }
+      });
+      modal.present();
+      const data = await modal.onDidDismiss();
+      this.dba.setTipo(data.data.result);
+      this.router.navigate([`/${url}`]);
+      
+
+    }
 
   }
 

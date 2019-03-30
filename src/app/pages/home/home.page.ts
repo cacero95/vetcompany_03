@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
+import { User } from 'src/app/models/usuarios';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  user:User;
+  usuarios:User[] = [];
+  constructor(private router:Router,
+    private storage:Storage) {
+      this.storage.get('usuarios').then(values=>{
+        this.usuarios = values;
+      });
+      console.log(this.usuarios);
+      if(this.usuarios){
+        this.user = this.usuarios[0];
+      }
+      
 
-  constructor(private router:Router) { }
+    }
 
   ngOnInit() {
   }

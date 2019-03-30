@@ -30,3 +30,4 @@ export interface Veterinaria {
     type:string;
     
 }
+
