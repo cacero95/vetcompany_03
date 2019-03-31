@@ -2,7 +2,6 @@ export interface User{
     
     apellido?:string;
     email?:string;
-    password?:string;
     name?:string;
     telefono?:number;
     direccion?:string;
@@ -20,7 +19,6 @@ export interface Mascota{
 export interface Veterinaria {
 
     email?:string;
-    password?:string;
     direccion?:string;
     name?:string;
     telefono?:number;

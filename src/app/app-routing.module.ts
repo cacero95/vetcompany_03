@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'grupos', loadChildren: './pages/grupos/grupos.module#GruposPageModule' },
   { path: 'tips', loadChildren: './pages/tips/tips.module#TipsPageModule' },
   { path: 'pet-info', loadChildren: './pages/pet-info/pet-info.module#PetInfoPageModule' },
-  { path: 'codigo-policial', loadChildren: './pages/codigo-policial/codigo-policial.module#CodigoPolicialPageModule' }
+  { path: 'codigo-policial', loadChildren: './pages/codigo-policial/codigo-policial.module#CodigoPolicialPageModule' },
+  { path: 'main', loadChildren: './pages/main/main.module#MainPageModule' }
   
   
   

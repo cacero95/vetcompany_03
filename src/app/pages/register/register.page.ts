@@ -112,7 +112,7 @@ export class RegisterPage implements OnInit {
           if (result){
 
             this.dba.registrar_user(this.user,false);
-            this.router.navigate(['/tabs/home']);
+            this.router.navigate(['/main']);
 
 
           }
@@ -130,7 +130,7 @@ export class RegisterPage implements OnInit {
           .createUserWithEmailAndPassword(this.vet.email,this.password)
           if (result){
             this.dba.registrar_vet(this.vet);
-            this.router.navigate(['/tabs/home']);
+            this.router.navigate(['/main']);
 
 
           }
@@ -166,7 +166,7 @@ export class RegisterPage implements OnInit {
         this.vet.type = this.type;
         try{
           let result = await this.fireAuth.auth
-          .createUserWithEmailAndPassword(this.vet.email,this.vet.password)
+          .createUserWithEmailAndPassword(this.vet.email,this.password)
           if (result){
             // this.dba.cargar_user(this.vet);
           }

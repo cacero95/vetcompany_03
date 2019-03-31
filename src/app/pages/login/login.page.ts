@@ -21,18 +21,43 @@ export class LoginPage implements OnInit {
 
   constructor(private dba:DbaService,
     private router:Router,
-    private fireauth:AngularFireAuth) { }
+    private fireauth:AngularFireAuth,
+    private alertCtrl:AlertController) { }
 
   ngOnInit() {
   }
 
+  async show_alert (title,mensaje){
+    let alert = await this.alertCtrl.create({
+      header:title,
+      animated:true,
+      message:mensaje,
+      buttons:[
+        {
+          text:'Ok',
+          role:'Ok'
+        }
+      ]
+    });
+    alert.present();
+  }
   async login(){
-    console.log(this.email)
+    
     const result = this.fireauth.auth.signInWithEmailAndPassword(this.email,this.password);
     try{
-
+      let data_user = {};
       if(result){
         this.dba.login(this.email);
+        
+        setTimeout(()=>{
+          data_user = this.dba.getUsuario();
+          if (data_user == {}){
+            this.show_alert('Usuario','No encontrado');
+          }
+          else {
+            this.router.navigate(['/main']);
+          }
+        },3000)
       }
       
     }

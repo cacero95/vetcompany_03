@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-title text-center>VetCompany</ion-title>
+    </ion-toolbar>
+</ion-header>
+<!--
+  Se muestra el contenido de tipo mascota
+-->
+<ion-content *ngIf="user">
+
+
+    <ion-card *ngFor="let pet of user.mascotas">
+        <img [src]="pet.url">
+        <ion-card-content>
+            <ion-card-title>{{pet.pet_name}}</ion-card-title>
+            <h2 color="primary">Padre:<small>{{user.name}}-{{user.apellido}}
+                </small>
+            </h2>
+            <h3 color="primary">Raza:<small>{{pet.raza}}</small></h3>
+            <ion-row>
+                <ion-col text-right>
+                    <ion-button (click)="shared(pet.url)" text-right size="small" fill="clear" color="primary">
+                        <ion-icon slot="end" name="share-alt"></ion-icon>
+                        Compartir
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+
+
+
+
+
+</ion-content>
+<!--
+  Se muestra el contenido de tipo institute
+-->
+<ion-content *ngIf="vet">
+
+</ion-content>

@@ -21,6 +21,7 @@ export class DbaService {
     private storage:Storage) { }
   
   login(email){
+    let usuario_log = {};
     let key = email;
         key = key.replace("@","_");
         while(key.indexOf(".") != -1){
@@ -41,7 +42,7 @@ export class DbaService {
     this.actualiza.subscribe(data_user=>{
 
       let user:any = {};
-      console.log(data_user);
+      // console.log(data_user);
       for (let us of data_user){
         switch(us.key){
           case 'apellido':
@@ -74,11 +75,17 @@ export class DbaService {
           case 'url':
             user.url = us.data;
           break;
+          case 'users':
+            user.users = us.data;
 
         }
       }
+      this.setUsuario(user);
+      usuario_log = user;
+      
+      // verifico que el usuario se loggeo
     })
-    
+    return usuario_log;
   }
 
   registrar_vet(vet:Veterinaria){
