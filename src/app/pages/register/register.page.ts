@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DbaService } from 'src/app/services/dba.service';
-import { Veterinaria, User } from 'src/app/models/usuarios';
-import { AlertController } from '@ionic/angular';
+import { Veterinaria, User, Mascota } from 'src/app/models/usuarios';
+import { AlertController, ModalController } from '@ionic/angular';
 import { ImagePicker,ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 
 // firebase
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { MascotaPage } from '../mascota/mascota.page';
 
 
 @Component({
@@ -23,14 +24,20 @@ export class RegisterPage implements OnInit {
   servicios:any[] = [];
   image64:string;
   password:string;
+  count:number;
+  pets:Mascota[] = [];
+
+  is_image:boolean;
+
   constructor(private dba:DbaService,
     private alertCtrl:AlertController,
     private image:ImagePicker,
     private fireAuth:AngularFireAuth,
-    private router:Router) {
+    private router:Router,
+    private modalCtrl:ModalController) {
     
     this.type = this.dba.getTipo();
-    
+    this.is_image = false;
     this.services = [
     {
         nombre: 'Guarderia',
@@ -86,14 +93,16 @@ export class RegisterPage implements OnInit {
           text:'Si',
           role: 'Confirmar',
           handler:()=>{
-            this.agregar_user(true)
+            this.is_image = true;
+            this.agregar_user()
           }
         },
         {
           text:'No',
           role:'cancelar',
           handler:()=>{
-            this.agregar_user(false)
+            this.is_image = false;
+            this.agregar_user()
           }
         }
       ]
@@ -103,8 +112,75 @@ export class RegisterPage implements OnInit {
   /**
    * Permite seleccionar una imagen del celular
    */
-  async agregar_user(is_image){
-    if (!is_image){
+  mascotas(){
+     
+      this.numero_mascotas('Cuantas', 'Mascotas tienes?');
+      
+    
+    
+  }
+  async numero_mascotas( titulo:string, mensaje:string ){
+    const alert = await this.alertCtrl.create({
+      header:titulo,
+      subHeader:mensaje,
+      inputs:[
+        {
+          name: 'n_mascotas',
+          type:'number',
+          min: 1
+        }
+
+      ],
+      buttons:[
+        {
+          text: 'Ok',
+          role: 'Ok',
+          cssClass: 'primary',
+          // numero mascotas del usuario en cuestion
+          handler: cuenta =>{
+            this.user.nMascotas = cuenta.n_mascotas;
+            this.count = this.user.nMascotas; // le mando al contador el numero de mascotas de a persona 
+            //console.log(this.count)
+            
+            this.crear_mascota();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: ()=>{
+            console.log('no hay mascotas');
+            
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  async crear_mascota(){
+    for (let x = 0; x < this.count; x++){
+      let modal = await this.modalCtrl.create({
+        component: MascotaPage
+      })
+      modal.present();
+      let data = await modal.onDidDismiss();
+      //console.log(data.data.mascota);
+      if (data.data.mascota == "cancelo"){
+        return; // si el usuario cancela entonces se cierra el metodo
+      }
+      this.pets.push(data.data.mascota);
+      this.is_image = data.data.is_image;
+      //console.log(this.pets)
+    }
+    this.user.mascotas = this.pets;
+    
+  }
+
+  async agregar_user(){
+    if (!this.is_image){
       if(this.type == 'mascota'){
         try{
           let result = await this.fireAuth.auth

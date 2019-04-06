@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'main', loadChildren: './pages/main/main.module#MainPageModule' },
   { path: 'editar-servicios', loadChildren: './pages/editar-servicios/editar-servicios.module#EditarServiciosPageModule' },
   { path: 'calendar', loadChildren: './pages/vet_services/calendar/calendar.module#CalendarPageModule' },
-  { path: 'users', loadChildren: './pages/vet_services/users/users.module#UsersPageModule' }
+  { path: 'users', loadChildren: './pages/vet_services/users/users.module#UsersPageModule' },
+  { path: 'mascota', loadChildren: './pages/mascota/mascota.module#MascotaPageModule' }
   
   
   
