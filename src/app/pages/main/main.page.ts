@@ -3,6 +3,7 @@ import { DbaService } from 'src/app/services/dba.service';
 import { User, Veterinaria } from 'src/app/models/usuarios';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -14,9 +15,17 @@ export class MainPage implements OnInit {
   user:User;
   vet:Veterinaria;
   url:'https://ionicacademy.com';
+
+  public menu = [
+    
+    {title: 'Tips mascotas', url: '/tips', icon: 'people'},
+    {title: 'informacion para mascotas', url:'/pet-info', icon:'analitics'}
+  
+  ]
   constructor(private dba:DbaService,
     private social:SocialSharing,
-    private alertCtrl:AlertController) { }
+    private alertCtrl:AlertController,
+    private router:Router) { }
 
   ngOnInit() {
     let usuario = this.dba.getUsuario();
@@ -111,6 +120,36 @@ export class MainPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  contactar(number){
+
+  }
+  ubicar (locate){
+    this.router.navigate([`/${locate}`]);
+  }
+  async add(){
+    let alert = await this.alertCtrl.create({
+      header: 'Agrega',
+      buttons:[
+        {
+          text:'Servicios',
+          role: 'Servicios',
+          handler:()=>{
+            console.log('agregar servicios');
+          }
+        },
+        {
+          text: 'Clientes',
+          role: 'clientes',
+          handler:()=>{
+            console.log('agregar clientes');
+          }
+        }
+      ]
+    });
+
+    alert.present();
   }
 
 }

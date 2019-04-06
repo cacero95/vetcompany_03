@@ -1,13 +1,61 @@
+<ion-split-pane>
+    <ion-menu>
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>Menu</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <ion-list>
+                <ion-menu-toggle auto-hidden="false" *ngFor="let item of menu">
+                    <ion-item [routerDirection]="'root'" (click)="ubicar(item.url)">
+                        <ion-icon [name]="item.icon"></ion-icon>
+                    </ion-item>
+                </ion-menu-toggle>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+</ion-split-pane>
 <ion-header>
-    <ion-toolbar color="tertiary">
+    <ion-toolbar slot="start" color="tertiary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
         <ion-title text-center>VetCompany</ion-title>
     </ion-toolbar>
+    <ion-toolbar *ngIf="user">
+        <ion-searchbar placeholder="Nombre de tu mascota.."></ion-searchbar>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="vet">
+        <ion-tabs>
+
+            <ion-tab-bar slot="top">
+                <ion-tab-button (click)="ubicar('calendar')">
+                    <ion-icon name="calendar"></ion-icon>
+                    <ion-label>Cronograma</ion-label>
+                </ion-tab-button>
+                <ion-tab-button (click)="ubicar('main')">
+                    <ion-icon name="home"></ion-icon>
+                    <ion-label>{{vet.name}}</ion-label>
+                </ion-tab-button>
+                <ion-tab-button (click)="ubicar('users')">
+                    <ion-icon name="people"></ion-icon>
+                    <ion-label>Usuarios</ion-label>
+                </ion-tab-button>
+
+            </ion-tab-bar>
+        </ion-tabs>
+    </ion-toolbar>
+
 </ion-header>
 <!--
   Se muestra el contenido de tipo mascota
 -->
 <ion-content *ngIf="user">
 
+    <!--american_clinic
+        gabiotas_canarios
+    -->
 
     <ion-card *ngFor="let pet of user.mascotas">
         <img [src]="pet.url">
@@ -29,13 +77,55 @@
     </ion-card>
 
 
-
-
-
 </ion-content>
+
+
+
+
+
+
 <!--
   Se muestra el contenido de tipo institute
 -->
 <ion-content *ngIf="vet">
+
+    <ion-card>
+
+        <ion-item>
+
+            <h2>{{vet.name}}</h2>
+
+        </ion-item>
+
+        <img [src]="vet.url">
+
+        <ion-card-content>
+            <h2>Podemos en encontrarla en {{vet.direccion}}</h2>
+            <h3>contactar al correo {{vet.email}} </h3>
+            <h3> Servicios que ofrece </h3>
+            <ul>
+                <li *ngFor="let servicios of vet.services">
+                    {{servicios}}
+                </li>
+            </ul>
+        </ion-card-content>
+        <ion-row>
+            <ion-col text-right>
+                <ion-button (click)="contactar(vet.telefono)" text-right size="small" fill="clear" color="primary">
+                    <ion-icon slot="end" name="call"></ion-icon>
+                    {{vet.telefono}}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+
+    </ion-card>
+
+    <ion-fab color="danger" vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button (click)="add()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
 
 </ion-content>

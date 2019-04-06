@@ -12,6 +12,8 @@ import { DbaService } from './services/dba.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  
+  
 
   public appMenu = [
     
@@ -29,6 +31,10 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
+
+  
+
+
   async navegar(url){
 
     

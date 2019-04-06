@@ -12,6 +12,7 @@ import { DbaService } from 'src/app/services/dba.service';
 export class HomePage implements OnInit {
   user:any;
   usuarios:any[] = [];
+  
   constructor(private router:Router,
     private storage:Storage,
     private dba:DbaService) {
