@@ -126,7 +126,7 @@ export class MainPage implements OnInit {
 
   }
   ubicar (locate){
-    this.router.navigate([`/${locate}`]);
+    this.router.navigate([`/central/${locate}`]);
   }
   async add(){
     let alert = await this.alertCtrl.create({

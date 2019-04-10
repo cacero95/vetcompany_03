@@ -5,9 +5,7 @@
         </ion-buttons>
         <ion-title text-center>VetCompany</ion-title>
     </ion-toolbar>
-    <ion-toolbar *ngIf="user">
-        <ion-searchbar placeholder="Nombre de tu mascota.."></ion-searchbar>
-    </ion-toolbar>
+
     <ion-toolbar *ngIf="vet">
         <ion-tabs>
 
@@ -28,6 +26,31 @@
             </ion-tab-bar>
         </ion-tabs>
     </ion-toolbar>
+
+    <!--Tab bar para normal user-->
+
+    <ion-toolbar *ngIf="user">
+        <ion-tabs>
+
+            <ion-tab-bar slot="top">
+                <ion-tab-button (click)="ubicar('calendar')">
+                    <ion-icon name="calendar"></ion-icon>
+                    <ion-label>Cronograma</ion-label>
+                </ion-tab-button>
+                <ion-tab-button (click)="ubicar('main')">
+                    <ion-icon name="home"></ion-icon>
+                    <ion-label>{{user.name}}</ion-label>
+                </ion-tab-button>
+                <ion-tab-button (click)="ubicar('notificaciones')">
+                    <ion-icon name="people"></ion-icon>
+                    <ion-label>notificaciones</ion-label>
+                </ion-tab-button>
+
+            </ion-tab-bar>
+        </ion-tabs>
+    </ion-toolbar>
+
+
 
 </ion-header>
 <!--

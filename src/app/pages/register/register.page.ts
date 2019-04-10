@@ -188,7 +188,7 @@ export class RegisterPage implements OnInit {
           if (result){
 
             this.dba.registrar_user(this.user,false);
-            this.router.navigate(['/main']);
+            this.router.navigate(['/central/main']);
 
 
           }
@@ -206,7 +206,7 @@ export class RegisterPage implements OnInit {
           .createUserWithEmailAndPassword(this.vet.email,this.password)
           if (result){
             this.dba.registrar_vet(this.vet);
-            this.router.navigate(['/main']);
+            this.router.navigate(['/central/main']);
 
 
           }
@@ -230,7 +230,19 @@ export class RegisterPage implements OnInit {
       },(err)=>console.log(JSON.stringify(err)));
       
       if (this.type == 'mascota'){
+
         // hay que crear el modal para crear el user
+        try{
+          let result = await this.fireAuth.auth
+          .createUserWithEmailAndPassword(this.user.email,this.password);
+          if(result){
+            this.dba.registrar_user(this.user,true);
+            this.router.navigate(['/center/main']);
+          }
+        }
+        catch(err){
+          console.log(JSON.stringify(err));
+        }
       }
       else{
         /**
@@ -245,6 +257,8 @@ export class RegisterPage implements OnInit {
           .createUserWithEmailAndPassword(this.vet.email,this.password)
           if (result){
             // this.dba.cargar_user(this.vet);
+            this.dba.registrar_vet(this.vet);
+            this.router.navigate(['/central/main']);
           }
         }
         catch(err){

@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
             this.show_alert('Usuario','No encontrado');
           }
           else {
-            this.router.navigate(['/main']);
+            this.router.navigate(['/central/main']);
           }
         },3000)
       }

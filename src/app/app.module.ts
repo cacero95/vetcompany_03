@@ -22,7 +22,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FullViewPage } from './pages/full-view/full-view.page';
-import { UserInfoPage } from './pages/user-info/user-info.page';
+import { TwitterGroupPage } from './pages/grupos/twitter-group/twitter-group.page';
+
 
 // firebase credentials
 
@@ -37,8 +38,8 @@ export const firebaseConfig = {
 
 
 @NgModule({
-  declarations: [AppComponent,TypeUserPage,FullViewPage,UserInfoPage],
-  entryComponents: [TypeUserPage,FullViewPage,UserInfoPage],
+  declarations: [AppComponent,TypeUserPage,FullViewPage,TwitterGroupPage],
+  entryComponents: [TypeUserPage,FullViewPage,TwitterGroupPage],
   imports: [BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
